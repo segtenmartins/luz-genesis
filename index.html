@@ -9,16 +9,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cor-destaque: #2c1a00;
-    --cor-texto: #1a1108;
-    --cor-secundario: #5a4a30;
+    --cor-destaque: #1a0e00;
+    --cor-texto: #1c1108;
+    --cor-secundario: #3a2c14;
     --fundo: #fdf8f0;
     --fundo-card: rgba(180,140,60,0.07);
     --fundo-card-hover: rgba(180,140,60,0.14);
-    --borda: rgba(120,80,20,0.18);
-    --borda-forte: rgba(120,80,20,0.45);
-    --dourado: #a07020;
-    --dourado-claro: #c8951a;
+    --borda: rgba(120,80,20,0.22);
+    --borda-forte: rgba(120,80,20,0.55);
+    --dourado: #7a5010;
+    --dourado-claro: #a07020;
     --creme: #f5edd8;
     --nav-bg: rgba(253,248,240,0.96);
     --sombra: 0 4px 24px rgba(100,60,0,0.10);
@@ -161,7 +161,7 @@
     font-size: 0.75rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--cor-secundario);
+    color: #3a2c14;
     background: none;
     border: 1px solid transparent;
     border-radius: 4px;
@@ -169,6 +169,26 @@
     cursor: pointer;
     white-space: nowrap;
     transition: all 0.25s;
+  }
+
+  .nav-btn-indice {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--dourado);
+    border: 1px solid var(--dourado);
+    border-radius: 4px;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s;
+    flex-shrink: 0;
+  }
+  .nav-btn-indice:hover {
+    background: var(--dourado-claro);
+    border-color: var(--dourado-claro);
   }
 
   .nav-btn:hover {
@@ -303,7 +323,7 @@
     margin-bottom: 0.5rem;
     font-weight: 600;
   }
-  .card p { font-size: 0.95em; color: var(--cor-secundario); margin: 0; }
+  .card p { font-size: 0.95em; color: #2e2008; margin: 0; }
 
   /* ── ACORDEÃO ── */
   .acordeao { margin: 1.5rem 0; }
@@ -342,7 +362,7 @@
     padding: 0 1.2rem;
   }
   .acord-item.aberto .acord-corpo { max-height: 600px; }
-  .acord-corpo-inner { padding: 0.8rem 0 1.2rem; font-size: 0.97em; color: var(--cor-secundario); }
+  .acord-corpo-inner { padding: 0.8rem 0 1.2rem; font-size: 0.97em; color: #2a1c06; }
 
   /* ── LISTA DE PASSOS ── */
   .lista-passos { margin: 1.5rem 0; }
@@ -378,7 +398,7 @@
     display: block;
     margin-bottom: 0.2rem;
   }
-  .passo-texto p { margin: 0; font-size: 0.95em; color: var(--cor-secundario); }
+  .passo-texto p { margin: 0; font-size: 0.95em; color: #2a1c06; }
 
   /* ── IMPLICAÇÕES ── */
   .lista-impl { margin: 1.5rem 0; }
@@ -410,7 +430,7 @@
     margin-bottom: 0.25rem;
     font-weight: 600;
   }
-  .impl-item p { margin: 0; font-size: 0.95em; color: var(--cor-secundario); }
+  .impl-item p { margin: 0; font-size: 0.95em; color: #2a1c06; }
 
   /* ── VOCABULÁRIO ── */
   .vocab-grid {
@@ -446,7 +466,7 @@
     margin-bottom: 0.5rem;
     opacity: 0.8;
   }
-  .vocab-def { font-size: 0.92em; color: var(--cor-secundario); margin: 0; }
+  .vocab-def { font-size: 0.92em; color: #2a1c06; margin: 0; }
 
   /* ── TABELA COMPARATIVA ── */
   .tabela-wrap {
@@ -476,7 +496,7 @@
   td {
     padding: 0.8rem 1rem;
     border-bottom: 1px solid var(--borda);
-    color: var(--cor-secundario);
+    color: #2a1c06;
     vertical-align: top;
   }
   tr:last-child td { border-bottom: none; }
@@ -632,6 +652,37 @@
     margin-bottom: 1rem;
   }
 
+  /* ── ÍNDICE ── */
+  .indice-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--fundo-card);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: #1a0e00;
+    font-weight: 600;
+    text-align: left;
+    transition: all 0.25s;
+  }
+  .indice-item:hover {
+    border-color: var(--dourado);
+    background: var(--fundo-card-hover);
+    color: var(--dourado);
+    transform: translateX(4px);
+  }
+  .indice-num {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.75rem;
+    color: var(--dourado);
+    min-width: 1.8rem;
+  }
+
   /* ── RESPONSIVIDADE ── */
   @media (max-width: 600px) {
     .hero h1 { font-size: 1.7rem; }
@@ -655,9 +706,30 @@
   <div class="hero-seta" onclick="irPara('introducao')">▼</div>
 </section>
 
+<!-- ═══════════ ÍNDICE ═══════════ -->
+<section class="section" id="indice" data-nav="-1" style="max-width:700px; padding-top:2rem; padding-bottom:1rem;">
+  <div class="badge">Navegação</div>
+  <h2 class="section-titulo">Índice</h2>
+  <div class="section-linha"></div>
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:0.7rem; margin-top:0.5rem;">
+    <button class="indice-item" onclick="irPara('introducao')"><span class="indice-num">I</span> Introdução</button>
+    <button class="indice-item" onclick="irPara('vocabulario')"><span class="indice-num">II</span> Vocabulário</button>
+    <button class="indice-item" onclick="irPara('genesis')"><span class="indice-num">III</span> Gênesis 1</button>
+    <button class="indice-item" onclick="irPara('fisica')"><span class="indice-num">IV</span> Física Moderna</button>
+    <button class="indice-item" onclick="irPara('cmb')"><span class="indice-num">V</span> Radiação de Fundo</button>
+    <button class="indice-item" onclick="irPara('gloria')"><span class="indice-num">VI</span> Glória de Deus</button>
+    <button class="indice-item" onclick="irPara('convergencia')"><span class="indice-num">VII</span> Convergências</button>
+    <button class="indice-item" onclick="irPara('implicacoes')"><span class="indice-num">VIII</span> Implicações</button>
+    <button class="indice-item" onclick="irPara('referencias')"><span class="indice-num">IX</span> Referências</button>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
 <!-- ═══════════ NAV ═══════════ -->
 <nav id="mainNav">
   <div class="nav-inner">
+    <button class="nav-btn-indice" onclick="irPara('indice')">⊞ Índice</button>
     <button class="nav-btn" data-sec="introducao"    onclick="irPara('introducao')">Introdução</button>
     <button class="nav-btn" data-sec="vocabulario"   onclick="irPara('vocabulario')">Vocabulário</button>
     <button class="nav-btn" data-sec="genesis"       onclick="irPara('genesis')">Gênesis 1</button>
