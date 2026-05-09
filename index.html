@@ -30,10 +30,10 @@
 
   body {
     background: var(--fundo);
-    color: var(--cor-texto);
+    color: #1a0e00;
     font-family: 'EB Garamond', Georgia, serif;
-    font-size: clamp(1.15rem, 2.5vw, 1.35rem);
-    line-height: 1.75;
+    font-size: clamp(1.28rem, 2.8vw, 1.5rem);
+    line-height: 1.82;
     overflow-x: hidden;
   }
 
@@ -198,7 +198,7 @@
   }
 
   .nav-btn.ativo {
-    color: var(--cor-destaque);
+    color: #1a0e00;
     border-color: var(--dourado);
     background: rgba(160,112,32,0.10);
     font-weight: 600;
@@ -241,8 +241,8 @@
 
   .section-titulo {
     font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(1.3rem, 3vw, 2rem);
-    color: var(--cor-destaque);
+    font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+    color: #1a0e00;
     margin-bottom: 0.4rem;
   }
 
@@ -256,15 +256,16 @@
 
   .section p {
     margin-bottom: 1rem;
-    color: var(--cor-texto);
+    color: #1a0e00;
+    font-weight: 500;
   }
 
   /* ── CITAÇÃO ── */
   .citacao {
-    border-left: 3px solid var(--dourado);
+    border-left: 4px solid #c8920a;
     padding: 1.2rem 1.5rem;
     margin: 1.8rem 0;
-    background: var(--fundo-card);
+    background: #ffe066;
     border-radius: 0 8px 8px 0;
     position: relative;
   }
@@ -272,8 +273,8 @@
     content: '\201C';
     font-family: 'EB Garamond', serif;
     font-size: 4rem;
-    color: var(--dourado);
-    opacity: 0.3;
+    color: #7a5010;
+    opacity: 0.4;
     position: absolute;
     top: -0.5rem;
     left: 0.8rem;
@@ -281,14 +282,18 @@
   }
   .citacao p {
     font-style: italic;
+    font-size: 1.32rem;
+    font-weight: 500;
+    color: #1a0e00;
     margin-bottom: 0.5rem;
     padding-left: 1.5rem;
   }
   .citacao .ref {
     font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     letter-spacing: 0.08em;
-    color: var(--dourado);
+    color: #6b3f00;
+    font-weight: 600;
     padding-left: 1.5rem;
   }
 
@@ -317,13 +322,13 @@
   .card-icone { font-size: 1.8rem; margin-bottom: 0.6rem; }
   .card-titulo {
     font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     letter-spacing: 0.05em;
-    color: var(--cor-destaque);
+    color: #1a0e00;
     margin-bottom: 0.5rem;
     font-weight: 600;
   }
-  .card p { font-size: 0.95em; color: #2e2008; margin: 0; }
+  .card p { font-size: 1.05em; color: #1a0e00; margin: 0; font-weight: 500; }
 
   /* ── ACORDEÃO ── */
   .acordeao { margin: 1.5rem 0; }
@@ -362,7 +367,7 @@
     padding: 0 1.2rem;
   }
   .acord-item.aberto .acord-corpo { max-height: 600px; }
-  .acord-corpo-inner { padding: 0.8rem 0 1.2rem; font-size: 0.97em; color: #2a1c06; }
+  .acord-corpo-inner { padding: 0.8rem 0 1.2rem; font-size: 1.05em; color: #1a0e00; font-weight: 500; line-height: 1.82; }
 
   /* ── LISTA DE PASSOS ── */
   .lista-passos { margin: 1.5rem 0; }
@@ -393,12 +398,12 @@
   }
   .passo-texto strong {
     font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
-    color: var(--cor-destaque);
+    font-size: 0.95rem;
+    color: #1a0e00;
     display: block;
     margin-bottom: 0.2rem;
   }
-  .passo-texto p { margin: 0; font-size: 0.95em; color: #2a1c06; }
+  .passo-texto p { margin: 0; font-size: 1.02em; color: #1a0e00; font-weight: 500; }
 
   /* ── IMPLICAÇÕES ── */
   .lista-impl { margin: 1.5rem 0; }
@@ -423,14 +428,14 @@
   }
   .impl-titulo {
     font-family: 'Cinzel', serif;
-    font-size: 0.82rem;
+    font-size: 0.88rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--cor-destaque);
+    color: #1a0e00;
     margin-bottom: 0.25rem;
     font-weight: 600;
   }
-  .impl-item p { margin: 0; font-size: 0.95em; color: #2a1c06; }
+  .impl-item p { margin: 0; font-size: 1.02em; color: #1a0e00; font-weight: 500; }
 
   /* ── VOCABULÁRIO ── */
   .vocab-grid {
@@ -466,7 +471,7 @@
     margin-bottom: 0.5rem;
     opacity: 0.8;
   }
-  .vocab-def { font-size: 0.92em; color: #2a1c06; margin: 0; }
+  .vocab-def { font-size: 1em; color: #1a0e00; margin: 0; font-weight: 500; }
 
   /* ── TABELA COMPARATIVA ── */
   .tabela-wrap {
@@ -496,8 +501,10 @@
   td {
     padding: 0.8rem 1rem;
     border-bottom: 1px solid var(--borda);
-    color: #2a1c06;
+    color: #1a0e00;
+    font-weight: 500;
     vertical-align: top;
+    font-size: 1em;
   }
   tr:last-child td { border-bottom: none; }
   tr:hover td { background: var(--fundo-card); }
@@ -507,13 +514,14 @@
   .refs-wrap { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.5rem 0; }
   .ref-tag {
     font-family: 'Cinzel', serif;
-    font-size: 0.78rem;
+    font-size: 0.82rem;
     letter-spacing: 0.06em;
     border: 1px solid var(--borda-forte);
     border-radius: 4px;
     padding: 0.3rem 0.75rem;
     cursor: pointer;
-    color: var(--cor-secundario);
+    color: #1a0e00;
+    font-weight: 600;
     background: var(--fundo-card);
     transition: all 0.2s;
     position: relative;
@@ -549,9 +557,10 @@
 
   /* ── DESTAQUE BÍBLICO ── */
   .biblia-destaque {
-    background: linear-gradient(135deg, rgba(160,112,32,0.10), rgba(200,149,26,0.06));
-    border: 1px solid rgba(160,112,32,0.25);
-    border-radius: 12px;
+    background: #ffe066;
+    border: 1px solid rgba(160,112,32,0.35);
+    border-left: 4px solid #c8920a;
+    border-radius: 0 12px 12px 0;
     padding: 1.5rem 1.8rem;
     margin: 1.5rem 0;
     text-align: center;
@@ -559,16 +568,17 @@
   .biblia-destaque .versic {
     font-family: 'Cinzel Decorative', serif;
     font-size: clamp(1rem, 2.5vw, 1.3rem);
-    color: var(--cor-destaque);
+    color: #1a0e00;
     font-style: italic;
-    line-height: 1.5;
+    line-height: 1.55;
     margin-bottom: 0.6rem;
   }
   .biblia-destaque .ref {
     font-family: 'Cinzel', serif;
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     letter-spacing: 0.1em;
-    color: var(--dourado);
+    color: #6b3f00;
+    font-weight: 600;
   }
 
   /* ── RODAPÉ ── */
@@ -609,8 +619,9 @@
   .footer-nota {
     margin-top: 1rem;
     font-style: italic;
-    font-size: 0.88em;
-    color: var(--cor-secundario);
+    font-size: 1em;
+    color: #3a2c14;
+    font-weight: 500;
   }
 
   /* ── BACK TO TOP ── */
