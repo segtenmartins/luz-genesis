@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Luz do Primeiro Dia — Pr. João Alves</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cor-destaque: #2c1a00;
+    --cor-texto: #1a1108;
+    --cor-secundario: #5a4a30;
+    --fundo: #fdf8f0;
+    --fundo-card: rgba(180,140,60,0.07);
+    --fundo-card-hover: rgba(180,140,60,0.14);
+    --borda: rgba(120,80,20,0.18);
+    --borda-forte: rgba(120,80,20,0.45);
+    --dourado: #a07020;
+    --dourado-claro: #c8951a;
+    --creme: #f5edd8;
+    --nav-bg: rgba(253,248,240,0.96);
+    --sombra: 0 4px 24px rgba(100,60,0,0.10);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--fundo);
+    color: var(--cor-texto);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+    line-height: 1.75;
+    overflow-x: hidden;
+  }
+
+  /* ── PROGRESS BAR ── */
+  #progressBar {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--dourado), var(--dourado-claro));
+    z-index: 1000;
+    transition: width 0.1s linear;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 1.5rem 5rem;
+    background: linear-gradient(160deg, #fdf8f0 0%, #f5edd8 50%, #ede0c4 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 30%, rgba(180,140,60,0.10) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 80% 70%, rgba(200,160,80,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-symbol {
+    font-size: clamp(3.5rem, 10vw, 6rem);
+    animation: flutuar 4s ease-in-out infinite;
+    margin-bottom: 1.5rem;
+    filter: drop-shadow(0 8px 24px rgba(160,112,32,0.25));
+  }
+
+  @keyframes flutuar {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-14px); }
+  }
+
+  .hero-categoria {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--dourado);
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
+    font-weight: 700;
+    color: var(--cor-destaque);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    max-width: 820px;
+  }
+
+  .hero-subtitulo {
+    font-style: italic;
+    font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+    color: var(--cor-secundario);
+    max-width: 600px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-autor {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.85rem, 1.8vw, 1rem);
+    color: var(--dourado);
+    letter-spacing: 0.1em;
+  }
+
+  .hero-seta {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    color: var(--dourado);
+    animation: seta-pulse 2s ease-in-out infinite;
+    cursor: pointer;
+  }
+
+  @keyframes seta-pulse {
+    0%, 100% { opacity: 0.4; transform: translateX(-50%) scaleY(1); }
+    50%       { opacity: 1;   transform: translateX(-50%) scaleY(1.2); }
+  }
+
+  /* ── NAV ── */
+  #mainNav {
+    position: sticky;
+    top: 0;
+    z-index: 900;
+    background: var(--nav-bg);
+    border-bottom: 1px solid var(--borda);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 2px 12px rgba(100,60,0,0.07);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.6rem 1rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cor-secundario);
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.25s;
+  }
+
+  .nav-btn:hover {
+    color: var(--dourado);
+    border-color: var(--borda-forte);
+    background: var(--fundo-card);
+  }
+
+  .nav-btn.ativo {
+    color: var(--cor-destaque);
+    border-color: var(--dourado);
+    background: rgba(160,112,32,0.10);
+    font-weight: 600;
+  }
+
+  /* ── DIVISOR ── */
+  .divisor {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .divisor::before, .divisor::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--borda);
+  }
+  .divisor-glifo {
+    font-size: 1.1rem;
+    color: var(--dourado);
+    opacity: 0.6;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .section.visivel {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-titulo {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    color: var(--cor-destaque);
+    margin-bottom: 0.4rem;
+  }
+
+  .section-linha {
+    width: 3rem;
+    height: 2px;
+    background: var(--dourado);
+    margin-bottom: 1.8rem;
+    border-radius: 2px;
+  }
+
+  .section p {
+    margin-bottom: 1rem;
+    color: var(--cor-texto);
+  }
+
+  /* ── CITAÇÃO ── */
+  .citacao {
+    border-left: 3px solid var(--dourado);
+    padding: 1.2rem 1.5rem;
+    margin: 1.8rem 0;
+    background: var(--fundo-card);
+    border-radius: 0 8px 8px 0;
+    position: relative;
+  }
+  .citacao::before {
+    content: '\201C';
+    font-family: 'EB Garamond', serif;
+    font-size: 4rem;
+    color: var(--dourado);
+    opacity: 0.3;
+    position: absolute;
+    top: -0.5rem;
+    left: 0.8rem;
+    line-height: 1;
+  }
+  .citacao p {
+    font-style: italic;
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+  }
+  .citacao .ref {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    color: var(--dourado);
+    padding-left: 1.5rem;
+  }
+
+  /* ── CARDS ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.2rem;
+    margin: 1.5rem 0;
+  }
+
+  .card {
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    padding: 1.4rem;
+    background: var(--fundo-card);
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+  .card:hover {
+    border-color: var(--dourado);
+    background: var(--fundo-card-hover);
+    transform: translateY(-3px);
+    box-shadow: var(--sombra);
+  }
+  .card-icone { font-size: 1.8rem; margin-bottom: 0.6rem; }
+  .card-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    color: var(--cor-destaque);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  .card p { font-size: 0.95em; color: var(--cor-secundario); margin: 0; }
+
+  /* ── ACORDEÃO ── */
+  .acordeao { margin: 1.5rem 0; }
+  .acord-item {
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    margin-bottom: 0.6rem;
+    overflow: hidden;
+    background: var(--fundo-card);
+  }
+  .acord-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    color: var(--cor-destaque);
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  .acord-header:hover { background: var(--fundo-card-hover); }
+  .acord-seta {
+    font-size: 0.8rem;
+    color: var(--dourado);
+    transition: transform 0.3s;
+    flex-shrink: 0;
+  }
+  .acord-item.aberto .acord-seta { transform: rotate(180deg); }
+  .acord-corpo {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding: 0 1.2rem;
+  }
+  .acord-item.aberto .acord-corpo { max-height: 600px; }
+  .acord-corpo-inner { padding: 0.8rem 0 1.2rem; font-size: 0.97em; color: var(--cor-secundario); }
+
+  /* ── LISTA DE PASSOS ── */
+  .lista-passos { margin: 1.5rem 0; }
+  .passo {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .passo.visivel { opacity: 1; transform: translateX(0); }
+  .passo-num {
+    flex-shrink: 0;
+    width: 2.2rem;
+    height: 2.2rem;
+    border: 1.5px solid var(--dourado);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    color: var(--dourado);
+    font-weight: 600;
+    margin-top: 0.1rem;
+  }
+  .passo-texto strong {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: var(--cor-destaque);
+    display: block;
+    margin-bottom: 0.2rem;
+  }
+  .passo-texto p { margin: 0; font-size: 0.95em; color: var(--cor-secundario); }
+
+  /* ── IMPLICAÇÕES ── */
+  .lista-impl { margin: 1.5rem 0; }
+  .impl-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+    padding: 1rem 1.2rem;
+    border-left: 2px solid var(--dourado);
+    background: var(--fundo-card);
+    border-radius: 0 8px 8px 0;
+  }
+  .impl-ponto {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--dourado);
+    margin-top: 0.55rem;
+    box-shadow: 0 0 8px rgba(160,112,32,0.4);
+  }
+  .impl-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cor-destaque);
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+  }
+  .impl-item p { margin: 0; font-size: 0.95em; color: var(--cor-secundario); }
+
+  /* ── VOCABULÁRIO ── */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .vocab-item {
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    padding: 1.2rem;
+    background: var(--fundo-card);
+    transition: all 0.25s;
+  }
+  .vocab-item:hover {
+    border-color: var(--dourado);
+    background: var(--fundo-card-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra);
+  }
+  .vocab-palavra {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem;
+    color: var(--dourado);
+    margin-bottom: 0.2rem;
+  }
+  .vocab-translit {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--dourado-claro);
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+  }
+  .vocab-def { font-size: 0.92em; color: var(--cor-secundario); margin: 0; }
+
+  /* ── TABELA COMPARATIVA ── */
+  .tabela-wrap {
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    border-radius: 10px;
+    border: 1px solid var(--borda);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.93em;
+  }
+  thead {
+    background: rgba(160,112,32,0.12);
+  }
+  th {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--dourado);
+    padding: 0.9rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--borda);
+  }
+  td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--borda);
+    color: var(--cor-secundario);
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--fundo-card); }
+  td strong { color: var(--cor-destaque); font-style: normal; }
+
+  /* ── TAGS DE REFERÊNCIA ── */
+  .refs-wrap { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.5rem 0; }
+  .ref-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    border: 1px solid var(--borda-forte);
+    border-radius: 4px;
+    padding: 0.3rem 0.75rem;
+    cursor: pointer;
+    color: var(--cor-secundario);
+    background: var(--fundo-card);
+    transition: all 0.2s;
+    position: relative;
+  }
+  .ref-tag:hover {
+    border-color: var(--dourado);
+    color: var(--dourado);
+    background: var(--fundo-card-hover);
+  }
+  .ref-tag.flash {
+    background: var(--dourado);
+    color: #fff;
+    border-color: var(--dourado);
+  }
+
+  .tooltip {
+    position: fixed;
+    background: var(--cor-destaque);
+    color: var(--fundo);
+    font-family: 'EB Garamond', serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    padding: 0.5rem 0.9rem;
+    border-radius: 6px;
+    max-width: 280px;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  }
+  .tooltip.visivel { opacity: 1; }
+
+  /* ── DESTAQUE BÍBLICO ── */
+  .biblia-destaque {
+    background: linear-gradient(135deg, rgba(160,112,32,0.10), rgba(200,149,26,0.06));
+    border: 1px solid rgba(160,112,32,0.25);
+    border-radius: 12px;
+    padding: 1.5rem 1.8rem;
+    margin: 1.5rem 0;
+    text-align: center;
+  }
+  .biblia-destaque .versic {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    color: var(--cor-destaque);
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 0.6rem;
+  }
+  .biblia-destaque .ref {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--dourado);
+  }
+
+  /* ── RODAPÉ ── */
+  footer {
+    background: var(--creme);
+    border-top: 1px solid var(--borda);
+    text-align: center;
+    padding: 3rem 1.5rem;
+    margin-top: 2rem;
+  }
+  .footer-simbolo {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.6;
+  }
+  .footer-nome {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.05rem;
+    color: var(--cor-destaque);
+    margin-bottom: 0.3rem;
+  }
+  .footer-local {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--dourado);
+    margin-bottom: 0.5rem;
+  }
+  footer a {
+    color: var(--dourado);
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+  }
+  footer a:hover { color: var(--dourado-claro); text-decoration: underline; }
+  .footer-nota {
+    margin-top: 1rem;
+    font-style: italic;
+    font-size: 0.88em;
+    color: var(--cor-secundario);
+  }
+
+  /* ── BACK TO TOP ── */
+  #backTop {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    background: var(--dourado);
+    color: #fff;
+    border: none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(160,112,32,0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 800;
+  }
+  #backTop.visivel { opacity: 1; pointer-events: all; }
+  #backTop:hover { transform: scale(1.1); }
+
+  /* ── INTRO BADGE ── */
+  .badge {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dourado);
+    border: 1px solid rgba(160,112,32,0.35);
+    border-radius: 4px;
+    padding: 0.2rem 0.65rem;
+    margin-bottom: 1rem;
+  }
+
+  /* ── RESPONSIVIDADE ── */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.7rem; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .vocab-grid { grid-template-columns: 1fr; }
+    td, th { padding: 0.6rem 0.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progressBar"></div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero">
+  <div class="hero-symbol">✦</div>
+  <div class="hero-categoria">Teologia · Cosmologia · Exegese Bíblica</div>
+  <h1>A Luz do Primeiro Dia</h1>
+  <p class="hero-subtitulo"><em>A Glória de Deus e a Radiação Cósmica de Fundo — uma convergência entre Gênesis e a Física Moderna</em></p>
+  <p class="hero-autor">Pr. João Alves</p>
+  <div class="hero-seta" onclick="irPara('introducao')">▼</div>
+</section>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <button class="nav-btn" data-sec="introducao"    onclick="irPara('introducao')">Introdução</button>
+    <button class="nav-btn" data-sec="vocabulario"   onclick="irPara('vocabulario')">Vocabulário</button>
+    <button class="nav-btn" data-sec="genesis"       onclick="irPara('genesis')">Gênesis 1</button>
+    <button class="nav-btn" data-sec="fisica"        onclick="irPara('fisica')">Física Moderna</button>
+    <button class="nav-btn" data-sec="cmb"           onclick="irPara('cmb')">Radiação de Fundo</button>
+    <button class="nav-btn" data-sec="gloria"        onclick="irPara('gloria')">Glória de Deus</button>
+    <button class="nav-btn" data-sec="convergencia"  onclick="irPara('convergencia')">Convergências</button>
+    <button class="nav-btn" data-sec="implicacoes"   onclick="irPara('implicacoes')">Implicações</button>
+    <button class="nav-btn" data-sec="referencias"   onclick="irPara('referencias')">Referências</button>
+  </div>
+</nav>
+
+<!-- ═══════════ INTRODUÇÃO ═══════════ -->
+<section class="section" id="introducao" data-nav="0">
+  <div class="badge">Ponto de Partida</div>
+  <h2 class="section-titulo">Introdução</h2>
+  <div class="section-linha"></div>
+
+  <p>No primeiro capítulo do Gênesis, há um aparente paradoxo que intriga leitores há milênios: Deus cria a <strong>luz no primeiro dia</strong>, mas os luminares — sol, lua e estrelas — só são criados no <strong>quarto dia</strong>.</p>
+
+  <div class="citacao">
+    <p>E disse Deus: <em>Haja luz! E houve luz.</em></p>
+    <span class="ref">Gênesis 1:3</span>
+  </div>
+
+  <p>A questão imediata é: de onde veio essa luz, se o sol ainda não existia? Céticos utilizaram essa passagem por séculos como argumento contra a credibilidade do texto bíblico. Porém, a física moderna — especialmente a cosmologia e a mecânica quântica — chegou a descobertas que iluminam este texto de forma surpreendente.</p>
+
+  <p>A tese que desenvolvemos aqui propõe que <strong>a luz do primeiro dia é a própria Glória de Deus</strong> — uma luz de natureza transcendente, anterior a qualquer fonte física — e que a ciência contemporânea reconhece um fenômeno análogo denominado <em>Radiação Cósmica de Fundo</em> (CMB), a luz primordial que permeia todo o universo desde seus primeiros instantes.</p>
+
+  <div class="biblia-destaque">
+    <div class="versic">"A cidade não precisa do sol nem da lua para lhe dar luz, pois a glória de Deus a ilumina."</div>
+    <div class="ref">Apocalipse 21:23</div>
+  </div>
+
+  <p>Esta não é uma equivalência meramente poética. A estrutura narrativa bíblica, a distinção linguística do hebraico original e os dados da astrofísica contemporânea convergem em direção a uma mesma conclusão: a luz de Gênesis 1:3 é qualitativamente diferente da luz solar — e o texto bíblico sabia disso há três mil anos.</p>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- ═══════════ VOCABULÁRIO ═══════════ -->
+<section class="section" id="vocabulario" data-nav="1">
+  <div class="badge">Léxico Essencial</div>
+  <h2 class="section-titulo">Vocabulário</h2>
+  <div class="section-linha"></div>
+  <p>Para compreender a tese em toda sua profundidade, é fundamental dominar os termos-chave em hebraico, grego e física. Passe o cursor sobre os cards para explorar.</p>
+
+  <div class="vocab-grid">
+    <div class="vocab-item">
+      <div class="vocab-palavra">אוֹר</div>
+      <div class="vocab-translit">Or</div>
+      <p class="vocab-def">Luz primordial, luz como fenômeno ou essência. Usada em Gênesis 1:3 para a luz do 1º dia. Não pressupõe fonte física.</p>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-palavra">מְאוֹרֹת</div>
+      <div class="vocab-translit">Meorot</div>
+      <p class="vocab-def">Portadores de luz, luminares, fontes físicas de iluminação. Usada em Gênesis 1:14 para o sol, a lua e as estrelas no 4º dia.</p>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-palavra">כָּבוֹד</div>
+      <div class="vocab-translit">Kavod</div>
+      <p class="vocab-def">Glória de Deus. Aparece nas teofanias bíblicas como presença luminosa visível da divindade (Ex 24:17; Ez 1:28).</p>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-palavra">שְׁכִינָה</div>
+      <div class="vocab-translit">Shekiná</div>
+      <p class="vocab-def">Presença habitante de Deus. Luz divina que habitou o Tabernáculo e o Templo, distinta de qualquer fonte criada.</p>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-palavra">אוֹר הגנוז</div>
+      <div class="vocab-translit">Or HaGanuz</div>
+      <p class="vocab-def">"Luz oculta" — na tradição rabínica, a luz primordial criada no 1º dia, depois guardada para os justos na era vindoura.</p>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-palavra">CMB</div>
+      <div class="vocab-translit">Cosmic Microwave Background</div>
+      <p class="vocab-def">Radiação Cósmica de Fundo. Luz remanescente do Big Bang (~380.000 anos após), que permeia todo o universo uniformemente.</p>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-palavra">φῶς</div>
+      <div class="vocab-translit">Phōs (grego)</div>
+      <p class="vocab-def">Luz no Novo Testamento. Em João 1:4-5, identificada com a Vida que estava em Cristo — luz que as trevas não compreenderam.</p>
+    </div>
+    <div class="vocab-item">
+      <div class="vocab-palavra">Fóton</div>
+      <div class="vocab-translit">Quantum of Light</div>
+      <p class="vocab-def">Partícula elementar da luz. Viaja à velocidade da luz e, nesse referencial, o tempo não existe — "vive" em eterno presente.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- ═══════════ GÊNESIS 1 ═══════════ -->
+<section class="section" id="genesis" data-nav="2">
+  <div class="badge">Exegese</div>
+  <h2 class="section-titulo">Gênesis 1 — O Texto Original</h2>
+  <div class="section-linha"></div>
+
+  <p>A chave do mistério está no hebraico original, que distingue com precisão dois conceitos que as traduções modernas frequentemente colapsam em uma única palavra: <strong>"luz"</strong>.</p>
+
+  <div class="acordeao">
+    <div class="acord-item">
+      <div class="acord-header" onclick="toggleAcord(this)">
+        <span>1º Dia — אוֹר (Or): A Luz Primordial</span>
+        <span class="acord-seta">▼</span>
+      </div>
+      <div class="acord-corpo">
+        <div class="acord-corpo-inner">
+          <em>וַיֹּאמֶר אֱלֹהִים יְהִי אוֹר וַיְהִי אוֹר</em><br><br>
+          "E disse Deus: Haja <strong>or</strong>! E houve <strong>or</strong>." (Gn 1:3)<br><br>
+          A palavra <strong>or</strong> designa luz como fenômeno puro, como essência luminosa. Não implica nenhuma fonte física. É a luz em si mesma, anterior a qualquer luminar. A tradição rabínica a identifica com a Or HaGanuz — a luz oculta reservada para a era messiânica.
+        </div>
+      </div>
+    </div>
+    <div class="acord-item">
+      <div class="acord-header" onclick="toggleAcord(this)">
+        <span>4º Dia — מְאוֹרֹת (Meorot): Os Portadores de Luz</span>
+        <span class="acord-seta">▼</span>
+      </div>
+      <div class="acord-corpo">
+        <div class="acord-corpo-inner">
+          <em>וַיַּעַשׂ אֱלֹהִים אֶת שְׁנֵי הַמְּאֹרֹת הַגְּדֹלִים</em><br><br>
+          "E fez Deus os dois grandes <strong>meorot</strong>..." (Gn 1:16)<br><br>
+          <strong>Meorot</strong> deriva da mesma raiz de <em>or</em>, mas designa especificamente os <em>portadores</em> de luz — veículos físicos de iluminação. O sol, a lua e as estrelas são criados como instrumentos secundários para distribuir a luz no espaço-tempo criado.
+        </div>
+      </div>
+    </div>
+    <div class="acord-item">
+      <div class="acord-header" onclick="toggleAcord(this)">
+        <span>A Distinção Perdida nas Traduções</span>
+        <span class="acord-seta">▼</span>
+      </div>
+      <div class="acord-corpo">
+        <div class="acord-corpo-inner">
+          Todas as grandes traduções bíblicas — Septuaginta, Vulgata, King James, Almeida — colapsaram <strong>or</strong> e <strong>meorot</strong> na mesma palavra "luz". Isso faz o texto parecer contraditório quando, na verdade, ele é teologicamente preciso: Deus cria a luz como <em>essência</em> antes de criar os luminares como <em>instrumentos</em>. A distinção não é acidental — o autor original fez questão de preservá-la usando dois termos distintos.
+        </div>
+      </div>
+    </div>
+    <div class="acord-item">
+      <div class="acord-header" onclick="toggleAcord(this)">
+        <span>A Inclusão Literária: Início e Fim da Narrativa Bíblica</span>
+        <span class="acord-seta">▼</span>
+      </div>
+      <div class="acord-corpo">
+        <div class="acord-corpo-inner">
+          A narrativa bíblica forma uma inclusão perfeita: em Gênesis, o universo começa <strong>sem sol mas com a luz de Deus</strong>. Em Apocalipse 21-22, a Nova Criação termina <strong>sem sol mas com a luz de Deus</strong>. O sol é provisório; a glória divina é a fonte primária e eterna de luz. Os luminares físicos cumprem sua função durante a era presente e são dispensados na plenitude do Reino.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="citacao">
+    <p><em>O sol não será mais a tua luz de dia, nem o resplendor da lua te iluminará; mas o Senhor será para ti luz eterna, e o teu Deus será a tua glória.</em></p>
+    <span class="ref">Isaías 60:19</span>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- ═══════════ FÍSICA MODERNA ═══════════ -->
+<section class="section" id="fisica" data-nav="3">
+  <div class="badge">Cosmologia</div>
+  <h2 class="section-titulo">A Física Moderna e a Luz Primordial</h2>
+  <div class="section-linha"></div>
+
+  <p>A física do século XX descobriu propriedades da luz que ultrapassam em muito o senso comum — e que guardam surpreendentes paralelos com a descrição bíblica.</p>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icone">⚡</div>
+      <div class="card-titulo">Relatividade e o Tempo da Luz</div>
+      <p>Einstein demonstrou que para um fóton viajando à velocidade da luz, o tempo não existe. Um fóton vive em "eterno presente" — sem passado nem futuro. A luz é literalmente a fronteira entre o tempo e a eternidade.</p>
+    </div>
+    <div class="card">
+      <div class="card-icone">🌌</div>
+      <div class="card-titulo">Época da Radiação</div>
+      <p>Nos primeiros instantes após o Big Bang, antes de qualquer átomo ou estrela, o universo era dominado por fótons puros — os físicos chamam isso de "época da radiação". Luz antes das estrelas, exatamente como Gênesis descreve.</p>
+    </div>
+    <div class="card">
+      <div class="card-icone">🔬</div>
+      <div class="card-titulo">Dualidade Onda-Partícula</div>
+      <p>No experimento da dupla fenda, a luz existe em estado de possibilidade infinita antes de ser observada. Ela colapsa em realidade definida apenas quando há um observador — o que sugere que luz e consciência têm uma relação fundamental.</p>
+    </div>
+    <div class="card">
+      <div class="card-icone">🌠</div>
+      <div class="card-titulo">Energia Escura</div>
+      <p>68% do universo é composto de energia escura — invisível, indetectável diretamente, mas que sustenta e expande o cosmos. Os rabinos descreveram há 2000 anos uma "luz oculta" que permeia toda a criação: a Or HaGanuz.</p>
+    </div>
+    <div class="card">
+      <div class="card-icone">⭐</div>
+      <div class="card-titulo">Estrelas de 3ª Geração</div>
+      <p>O Sol é uma estrela de terceira geração. Ele só pôde existir depois que duas gerações anteriores de estrelas viveram, morreram e espalharam carbono, oxigênio e ferro pelo cosmos. Luz antes do sol — literalmente.</p>
+    </div>
+    <div class="card">
+      <div class="card-icone">📐</div>
+      <div class="card-titulo">Schroeder e o Tempo Cósmico</div>
+      <p>O físico Gerald Schroeder (MIT) calculou que, usando o referencial do tempo cósmico com dilatação relativística, cada "dia" de Gênesis corresponde a um período preciso da história do universo, coincidindo com a sequência cosmológica estabelecida.</p>
+    </div>
+  </div>
+
+  <div class="lista-passos" id="passos-fisica">
+    <div class="passo">
+      <div class="passo-num">1</div>
+      <div class="passo-texto">
+        <strong>t = 0 — O Big Bang</strong>
+        <p>Singularidade inicial. Toda a energia, espaço e tempo começam. Temperatura infinita. Apenas energia pura — fótons em estado primordial.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">2</div>
+      <div class="passo-texto">
+        <strong>Época da Radiação (primeiros ~50.000 anos)</strong>
+        <p>O universo é dominado por fótons puros. Luz sem forma definida permeia toda a existência. Nenhuma matéria estável, nenhuma estrela — apenas luz primordial.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">3</div>
+      <div class="passo-texto">
+        <strong>Recombinação (~380.000 anos)</strong>
+        <p>Os elétrons se combinam com prótons formando átomos neutros. O universo torna-se transparente e a luz se propaga livremente — é esta luz que detectamos como Radiação Cósmica de Fundo.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">4</div>
+      <div class="passo-texto">
+        <strong>Primeiras Estrelas (~200 milhões de anos)</strong>
+        <p>Formação das primeiras estrelas massivas. Elas vivem e morrem violentamente, criando os elementos pesados necessários para planetas e vida.</p>
+      </div>
+    </div>
+    <div class="passo">
+      <div class="passo-num">5</div>
+      <div class="passo-texto">
+        <strong>O Sol (~9 bilhões de anos depois do Big Bang)</strong>
+        <p>Uma estrela de terceira geração, formada com o material de supernovas anteriores, suficientemente estável para sustentar um sistema planetário habitável.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- ═══════════ RADIAÇÃO DE FUNDO ═══════════ -->
+<section class="section" id="cmb" data-nav="4">
+  <div class="badge">CMB · Física</div>
+  <h2 class="section-titulo">A Radiação Cósmica de Fundo</h2>
+  <div class="section-linha"></div>
+
+  <p>Em 1965, Arno Penzias e Robert Wilson descobriram acidentalmente um ruído de micro-ondas que vinha uniformemente de todas as direções do céu. Era o eco luminoso do Big Bang — a <strong>Radiação Cósmica de Fundo</strong> (CMB, <em>Cosmic Microwave Background</em>). A descoberta lhes valeu o Nobel de Física em 1978.</p>
+
+  <div class="citacao">
+    <p><em>A CMB é a luz mais antiga do universo — fótons que viajam pelo cosmos há quase 13,8 bilhões de anos, permeando todo o espaço de forma extraordinariamente uniforme.</em></p>
+    <span class="ref">NASA · WMAP Science Team</span>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icone">📡</div>
+      <div class="card-titulo">Onipresença</div>
+      <p>A CMB permeia todo o universo observável de forma uniforme — está em todo lugar, em todas as direções. É a "luz de fundo" de toda a criação.</p>
+    </div>
+    <div class="card">
+      <div class="card-icone">🕰️</div>
+      <div class="card-titulo">Anterioridade</div>
+      <p>Esta luz existia antes de qualquer estrela, antes de qualquer galáxia, antes de qualquer luminar. É a luz primordial que precedeu todos os portadores físicos de luz.</p>
+    </div>
+    <div class="card">
+      <div class="card-icone">🌡️</div>
+      <div class="card-titulo">Temperatura e Forma</div>
+      <p>Hoje está resfriada a aproximadamente 2,7 Kelvin. Mas nos primeiros instantes era energia pura — a temperatura e a intensidade eram inimagináveis pelo padrão humano.</p>
+    </div>
+    <div class="card">
+      <div class="card-icone">🔭</div>
+      <div class="card-titulo">Detectável em Todo o Cosmos</div>
+      <p>Não importa para onde apontemos nossos telescópios — a CMB está lá. É o pano de fundo luminoso de todo o universo, sem exceção.</p>
+    </div>
+  </div>
+
+  <p>A analogia com a tese teológica é notável: assim como a <strong>glória de Deus (Kavod)</strong> permeia toda a criação, está presente antes de qualquer criatura e precede todos os luminares criados, a <strong>Radiação Cósmica de Fundo</strong> permeia todo o universo, antecede todas as estrelas e constitui o pano de fundo luminoso de toda a existência.</p>
+
+  <div class="biblia-destaque">
+    <div class="versic">"Para onde me irei do teu Espírito? E para onde fugirei da tua face? [...] Se tomarmos as asas da alvorada e habitarmos na extremidade do mar, ainda aí a tua mão me guiará."</div>
+    <div class="ref">Salmos 139:7,9-10</div>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- ═══════════ GLÓRIA DE DEUS ═══════════ -->
+<section class="section" id="gloria" data-nav="5">
+  <div class="badge">Teologia Bíblica</div>
+  <h2 class="section-titulo">A Glória de Deus como Luz</h2>
+  <div class="section-linha"></div>
+
+  <p>A tese central propõe que a <em>or</em> de Gênesis 1:3 é a <strong>Glória de Deus (Kavod)</strong> — a manifestação luminosa da presença divina. Essa identificação não é especulativa: está sustentada por uma coerente rede de textos bíblicos que abrange toda a Escritura, do Gênesis ao Apocalipse.</p>
+
+  <div class="lista-impl">
+    <div class="impl-item">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">Deus Habita em Luz</div>
+        <p>"O único que tem imortalidade, que <strong>habita em luz inacessível</strong>, a quem nenhum homem viu nem pode ver." (1 Timóteo 6:16)</p>
+      </div>
+    </div>
+    <div class="impl-item">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">Deus Coberto de Luz</div>
+        <p>"O Senhor reina; vestiu-se de majestade. [...] <strong>Ele se cobre de luz como de um manto.</strong>" (Salmos 104:1-2)</p>
+      </div>
+    </div>
+    <div class="impl-item">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">A Glória no Tabernáculo e no Templo</div>
+        <p>A Shekiná — a presença luminosa de Deus — habitava o Santo dos Santos. Esta luz não dependia do sol: brilhava independentemente de qualquer fonte física. (Êxodo 40:34-35; 1 Reis 8:10-11)</p>
+      </div>
+    </div>
+    <div class="impl-item">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">A Transfiguração</div>
+        <p>"E transfigurou-se diante deles; o seu rosto resplandeceu como o sol, e as suas vestes tornaram-se brancas como a luz." (Mateus 17:2) — A glória divina manifesta-se como luz intensa, não dependente do sol.</p>
+      </div>
+    </div>
+    <div class="impl-item">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">Cristo como Luz do Mundo</div>
+        <p>"Eu sou a luz do mundo; quem me segue não andará em trevas, mas terá a luz da vida." (João 8:12) — Jesus não se compara ao sol, mas se identifica com a luz primordial.</p>
+      </div>
+    </div>
+    <div class="impl-item">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">A Nova Jerusalém — Sem Sol</div>
+        <p>"A cidade não precisa do sol nem da lua para lhe dar luz, pois <strong>a glória de Deus a ilumina</strong>, e o seu candeeiro é o Cordeiro." (Apocalipse 21:23) — A narrativa bíblica completa seu arco: a luz do fim é a mesma do início.</p>
+      </div>
+    </div>
+  </div>
+
+  <p>A estrutura narrativa da Bíblia é cristalina: o universo começa com a luz de Deus antes dos luminares (Gênesis 1) e termina com a luz de Deus sem os luminares (Apocalipse 21-22). Os luminares físicos — sol, lua, estrelas — são instrumentos <em>provisórios</em> para a era presente, não a fonte última de luz.</p>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- ═══════════ CONVERGÊNCIAS ═══════════ -->
+<section class="section" id="convergencia" data-nav="6">
+  <div class="badge">Análise Comparativa</div>
+  <h2 class="section-titulo">Convergências</h2>
+  <div class="section-linha"></div>
+
+  <p>A tabela a seguir sintetiza as convergências entre a tese teológica, os dados linguísticos e as descobertas científicas:</p>
+
+  <div class="tabela-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Dimensão</th>
+          <th>Tese Teológica</th>
+          <th>Texto Hebraico</th>
+          <th>Física Moderna</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Natureza da Luz do 1º Dia</strong></td>
+          <td>Glória de Deus — luz divina transcendente</td>
+          <td><em>Or</em> — luz como essência, sem fonte física</td>
+          <td>Fótons primordiais da Época da Radiação</td>
+        </tr>
+        <tr>
+          <td><strong>Anterioridade ao Sol</strong></td>
+          <td>A glória precede toda criação</td>
+          <td><em>Or</em> criada antes dos <em>meorot</em></td>
+          <td>CMB existe há 13,8 bi de anos; Sol tem apenas 4,6 bi</td>
+        </tr>
+        <tr>
+          <td><strong>Onipresença</strong></td>
+          <td>A glória permeia toda a criação</td>
+          <td>Deus "se cobre de luz como manto" (Sl 104:2)</td>
+          <td>CMB detectável em todas as direções do universo</td>
+        </tr>
+        <tr>
+          <td><strong>Relação com o Tempo</strong></td>
+          <td>Deus existe fora do tempo — eterno presente</td>
+          <td>"Antes que os montes fossem formados" (Sl 90:2)</td>
+          <td>Fóton viaja sem experienciar o tempo (relatividade)</td>
+        </tr>
+        <tr>
+          <td><strong>Luz sem Fonte Física</strong></td>
+          <td>A Shekiná brilhava no Santo dos Santos sem sol</td>
+          <td><em>Or</em> não pressupõe <em>meor</em></td>
+          <td>Fótons primordiais existiam antes de qualquer estrela</td>
+        </tr>
+        <tr>
+          <td><strong>Luz como Origem de Tudo</strong></td>
+          <td>Deus é Luz — toda criação deriva Dele</td>
+          <td>Primeira coisa criada é <em>or</em></td>
+          <td>Universo começa dominado por energia radiante</td>
+        </tr>
+        <tr>
+          <td><strong>Escatologia (fim dos tempos)</strong></td>
+          <td>A glória substitui o sol na Nova Criação</td>
+          <td>Isaías 60:19 — Deus como luz eterna</td>
+          <td>Sol tem vida finita (~5 bi de anos restantes)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="citacao">
+    <p><em>A distinção entre or e meorot é uma distinção que a física moderna levou séculos para estabelecer — e ela estava no primeiro capítulo, no primeiro livro, esperando que alguém com o conhecimento certo lesse com atenção suficiente.</em></p>
+    <span class="ref">Análise do texto hebraico de Gênesis 1</span>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- ═══════════ IMPLICAÇÕES ═══════════ -->
+<section class="section" id="implicacoes" data-nav="7">
+  <div class="badge">Conclusões</div>
+  <h2 class="section-titulo">Implicações Teológicas</h2>
+  <div class="section-linha"></div>
+
+  <p>A convergência entre a exegese do hebraico original, a tradição bíblica e os dados da cosmologia moderna não é meramente acadêmica. Ela tem implicações profundas para a fé e a compreensão bíblica:</p>
+
+  <div class="lista-impl">
+    <div class="impl-item">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">O Texto Bíblico é Precisamente Acurado</div>
+        <p>A distinção <em>or / meorot</em> não é contradição nem erro — é precisão. O autor de Gênesis descreveu a sequência cosmológica correta (luz primordial → luminares físicos) com vocabulário adequado três milênios antes da física moderna chegar à mesma conclusão.</p>
+      </div>
+    </div>
+    <div class="impl-item">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">Fé e Ciência como Complementares</div>
+        <p>A Radiação Cósmica de Fundo não "explica" a glória de Deus, nem a glória de Deus "é" a CMB. Mas a analogia estrutural entre ambas sugere que a realidade física é um reflexo de realidades teológicas mais profundas — o cosmos foi criado para espelhar a natureza do Criador.</p>
+      </div>
+    </div>
+    <div class="impl-item">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">Cristo como Or do Mundo</div>
+        <p>Quando Jesus declara "Eu sou a luz do mundo" (Jo 8:12), a identificação é com a <em>or</em> primordial — não com os <em>meorot</em>. Ele é a luz que existia antes da criação e que sustenta toda a existência, a mesma que resplandeceu na Transfiguração sem necessidade de fonte física.</p>
+      </div>
+    </div>
+    <div class="impl-item">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">A Escatologia Confirma a Protologia</div>
+        <p>O fim confirma o início: assim como no princípio havia luz sem luminares físicos, no fim dos tempos haverá luz sem luminares físicos. A glória de Deus é a fonte alfa e ômega de toda iluminação. O sol é um instrumento temporário, não a realidade última.</p>
+      </div>
+    </div>
+    <div class="impl-item">
+      <div class="impl-ponto"></div>
+      <div>
+        <div class="impl-titulo">Convite à Reverência</div>
+        <p>Deus que "habita em luz inacessível" (1 Tm 6:16) não é uma metáfora poética — é uma afirmação sobre a natureza da realidade mais fundamental. A luz que permeia todo o cosmos desde o Big Bang é o pano de fundo de toda existência. Em cada fóton que nos aquece, há um eco da <em>or</em> primordial.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="biblia-destaque">
+    <div class="versic">"Deus é luz, e não há nenhum escuro nEle."</div>
+    <div class="ref">1 João 1:5</div>
+  </div>
+</section>
+
+<div class="divisor"><span class="divisor-glifo">✦</span></div>
+
+<!-- ═══════════ REFERÊNCIAS ═══════════ -->
+<section class="section" id="referencias" data-nav="8">
+  <div class="badge">Fontes</div>
+  <h2 class="section-titulo">Referências</h2>
+  <div class="section-linha"></div>
+
+  <p>Passe o cursor sobre as tags para ver a descrição de cada referência:</p>
+
+  <div class="refs-wrap">
+    <span class="ref-tag" data-tip="Gênesis 1:1-19 — O relato da criação com a distinção or / meorot no hebraico original" onclick="flashTag(this)">Gn 1:1-19</span>
+    <span class="ref-tag" data-tip="Isaías 60:19-20 — Profecias sobre a luz eterna de Deus substituindo o sol" onclick="flashTag(this)">Is 60:19-20</span>
+    <span class="ref-tag" data-tip="João 1:1-9 — O Logos como luz verdadeira que ilumina todo homem" onclick="flashTag(this)">Jo 1:1-9</span>
+    <span class="ref-tag" data-tip="João 8:12 — Jesus como luz do mundo" onclick="flashTag(this)">Jo 8:12</span>
+    <span class="ref-tag" data-tip="1 Timóteo 6:16 — Deus habitando em luz inacessível" onclick="flashTag(this)">1 Tm 6:16</span>
+    <span class="ref-tag" data-tip="Apocalipse 21:23 e 22:5 — A Nova Jerusalém sem sol, iluminada pela glória de Deus" onclick="flashTag(this)">Ap 21:23; 22:5</span>
+    <span class="ref-tag" data-tip="Mateus 17:2 — A Transfiguração: rosto de Jesus resplandece como o sol sem ser o sol" onclick="flashTag(this)">Mt 17:2</span>
+    <span class="ref-tag" data-tip="Salmos 104:2 — Deus coberto de luz como manto" onclick="flashTag(this)">Sl 104:2</span>
+    <span class="ref-tag" data-tip="Salmos 139:7-12 — A onipresença de Deus: até as trevas são como luz para Ele" onclick="flashTag(this)">Sl 139:7-12</span>
+    <span class="ref-tag" data-tip="1 João 1:5 — Deus é luz, sem nenhuma escuridão" onclick="flashTag(this)">1 Jo 1:5</span>
+    <span class="ref-tag" data-tip="Êxodo 40:34-35 — A glória de Deus (Shekiná) preenchendo o Tabernáculo" onclick="flashTag(this)">Êx 40:34-35</span>
+    <span class="ref-tag" data-tip="Einstein, A. (1905) — Teoria da Relatividade Especial: a luz como fronteira do espaço-tempo" onclick="flashTag(this)">Einstein (1905)</span>
+    <span class="ref-tag" data-tip="Penzias & Wilson (1965) — Descoberta da Radiação Cósmica de Fundo (CMB), Nobel de Física 1978" onclick="flashTag(this)">Penzias & Wilson (1965)</span>
+    <span class="ref-tag" data-tip="Schroeder, G. (1997) — 'The Science of God': correlação entre os 6 dias de Gênesis e a cosmologia moderna usando tempo relativo" onclick="flashTag(this)">Schroeder — The Science of God</span>
+    <span class="ref-tag" data-tip="Talmud Babilônico — Hagigah 12a: a Or HaGanuz, a luz oculta criada no primeiro dia" onclick="flashTag(this)">Talmud — Or HaGanuz</span>
+    <span class="ref-tag" data-tip="NASA WMAP/Planck — Mapeamento da Radiação Cósmica de Fundo: temperatura 2,7K, uniformidade de 1 em 100.000" onclick="flashTag(this)">NASA WMAP / Planck</span>
+    <span class="ref-tag" data-tip="Young, T. (1801) — Experimento da dupla fenda: natureza quântica da luz, dualidade onda-partícula" onclick="flashTag(this)">Young — Dupla Fenda (1801)</span>
+    <span class="ref-tag" data-tip="Riess, Schmidt & Perlmutter (1998) — Descoberta da expansão acelerada do universo e da energia escura, Nobel 2011" onclick="flashTag(this)">Energia Escura (Nobel 2011)</span>
+  </div>
+
+  <p style="margin-top: 2rem; font-style: italic; color: var(--cor-secundario); font-size: 0.95em;">As referências bíblicas seguem a tradução <em>Almeida Revista e Atualizada</em> (ARA), com consulta ao texto hebraico original (BHS — Biblia Hebraica Stuttgartensia) para as distinções lexicais discutidas neste estudo.</p>
+</section>
+
+<!-- ═══════════ RODAPÉ ═══════════ -->
+<footer>
+  <div class="footer-simbolo">✦</div>
+  <div class="footer-nome">Pr. João Alves</div>
+  <div class="footer-local">Vila Velha — Espírito Santo</div>
+  <a href="http://www.radiomateus633.com" target="_blank" rel="noopener">www.radiomateus633.com</a>
+  <p class="footer-nota"><em>A luz do 1º dia não é a luz do sol — é a Glória de Deus.<br>E a ciência, sem saber, a está redescubrindo.</em></p>
+</footer>
+
+<!-- ═══════════ TOOLTIP ═══════════ -->
+<div class="tooltip" id="tooltip"></div>
+
+<!-- ═══════════ BACK TO TOP ═══════════ -->
+<button id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Voltar ao topo">▲</button>
+
+<script>
+  // ── NAVEGAÇÃO ──
+  function irPara(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const navH = document.getElementById('mainNav').offsetHeight;
+    const top = el.getBoundingClientRect().top + window.scrollY - navH - 16;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+
+  // ── PROGRESS BAR ──
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    document.getElementById('progressBar').style.width = pct + '%';
+
+    // back to top
+    const btn = document.getElementById('backTop');
+    btn.classList.toggle('visivel', scrollTop > 400);
+  });
+
+  // ── INTERSECTION OBSERVER (seções) ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visivel');
+
+        // ativar nav
+        const navIdx = entry.target.dataset.nav;
+        document.querySelectorAll('.nav-btn').forEach((btn, i) => {
+          btn.classList.toggle('ativo', String(i) === navIdx);
+        });
+
+        // animar passos
+        const passos = entry.target.querySelectorAll('.passo');
+        passos.forEach((p, i) => {
+          setTimeout(() => p.classList.add('visivel'), i * 140);
+        });
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.section').forEach(s => observer.observe(s));
+
+  // ── ACORDEÃO ──
+  function toggleAcord(header) {
+    const item = header.parentElement;
+    const isAberto = item.classList.contains('aberto');
+    // fechar todos
+    document.querySelectorAll('.acord-item').forEach(i => i.classList.remove('aberto'));
+    if (!isAberto) item.classList.add('aberto');
+  }
+
+  // ── TOOLTIP ──
+  const tooltip = document.getElementById('tooltip');
+  document.querySelectorAll('.ref-tag').forEach(tag => {
+    tag.addEventListener('mouseenter', (e) => {
+      tooltip.textContent = tag.dataset.tip;
+      tooltip.classList.add('visivel');
+      posTooltip(e);
+    });
+    tag.addEventListener('mousemove', posTooltip);
+    tag.addEventListener('mouseleave', () => tooltip.classList.remove('visivel'));
+  });
+
+  function posTooltip(e) {
+    const tw = tooltip.offsetWidth || 220;
+    const th = tooltip.offsetHeight || 50;
+    let x = e.clientX + 14;
+    let y = e.clientY - th - 10;
+    if (x + tw > window.innerWidth - 10) x = e.clientX - tw - 14;
+    if (y < 10) y = e.clientY + 18;
+    tooltip.style.left = x + 'px';
+    tooltip.style.top  = y + 'px';
+  }
+
+  // ── FLASH TAG ──
+  function flashTag(el) {
+    el.classList.add('flash');
+    setTimeout(() => el.classList.remove('flash'), 600);
+  }
+</script>
+</body>
+</html>
